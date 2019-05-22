@@ -54,8 +54,6 @@ pod 'TXNetworking'
      };
 });
 ```
-#### 总结
-* 方法1和方法2具备相同设置功能,但方法2设置功能更多、更齐全以及更方便。
 #### API请求-方法1
 ```objc
 TXAPIRequest *apiRequest=[TXAPIRequest request];
@@ -67,9 +65,9 @@ apiRequest.headers=@{@"testAPIHeaders":@"APIHeaders"};
 apiRequest.contentTypes=[NSSet setWithObjects:@"testAPIContentTypes", nil];
 apiRequest.timeoutInterval=50;
 // 开始API请求
-[apiRequest startAPIRequest]
+[apiRequest startAPIRequest];
 // 取消API请求
-[apiRequest cancelAPIRequest]
+[apiRequest cancelAPIRequest];
 ```
 #### API请求-方法2
 ```objc
@@ -116,9 +114,92 @@ apiRequest
 })
 .start();
 ```
+#### Task请求-方法1
+```objc
+TXTaskRequest *taskRequest=[TXTaskRequest request];
+taskRequest.method=Download;
+taskRequest.url=@"TaskURL";
+taskRequest.baseURL=@"TaskbaseURL";
+taskRequest.parameters=@{@"testTaskParameters":@"TaskParameters"};
+taskRequest.headers=@{@"testTaskHeaders":@"TaskHeaders"};
+taskRequest.contentTypes=[NSSet setWithObjects:@"testTaskContentTypes", nil];
+taskRequest.timeoutInterval=50;
+taskRequest.downloadFilePath=@"testTaskDownloadFilePath";
+taskRequest.downloadFileName=@"fileName.zip";
+taskRequest.deBug=YES;
+// 开始Task请求
+[taskRequest startTaskRequest];
+// 取消Task请求
+[taskRequest cancelTaskRequest];
+// 继续Task请求
+[taskRequest resumeTaskRequest];
+// 暂停Task请求
+[taskRequest pauseTaskRequest];
+```
+#### Task请求-方法1
+```objc
+TXTaskRequest *taskRequest=[TXTaskRequest request];
+taskRequest.setMethod(Upload)
+.setURL(@"TaskURLf2")
+.setBaseURL(@"TaskbaseURLf2")
+.setParameters(@{@"testTaskParameters2":@"testTaskParameters2"})
+.addParameters(@{@"addTestTaskParameters2":@"addTestTaskParameters2"})
+.setHeaders(@{@"testTaskHeaders2":@"testTaskHeaders2"})
+.addHeaders(@{@"addTestTaskHeaders2":@"addTestTaskHeaders2"})
+.setContentTypes([NSSet setWithObject:@"testTaskContentTypes2"])
+.addContentTypes([NSSet setWithObject:@"addTestTaskContentTypes2"])
+.setTimeoutInterval(60)
+.setDownloadFilePath(@"testTaskDownloadFilePathf2")
+.setDeBug(YES)
+.setSuccessHandler(^ (id obj) {
+      // 回到主线程刷新UI
+      dispatch_async(dispatch_get_main_queue(), ^{
+          label.text=@"下载1下载成功";
+      });
+      NSLog(@"下载1:filePath:%@",obj);
+})
+.setFailureHandler(^ (id obj){
+      // 回到主线程刷新UI
+      dispatch_async(dispatch_get_main_queue(), ^{
+          label1.text=@"下载1下载失败";
+      });
+})
+.setProgressHandler(^ (id obj){
+      // 回到主线程刷新UI
+      dispatch_async(dispatch_get_main_queue(), ^{
+          NSProgress *progress=obj;
+          NSInteger completed=progress.fractionCompleted*100;
+          label.text=[NSString stringWithFormat:@"下载1的进度:%ld%%",(long)completed];
+      });
+})
+.setStateHandler(^ (TXTaskRequestState state){
+     switch (state) {
+         case TXTaskRequestStateRunning: {
+              NSLog(@"下载1状态:运行");
+         }
+              break;
+         case TXTaskRequestStatePause: {
+              NSLog(@"下载1状态:暂停");
+         }
+              break;
+         case TXTaskRequestStateCancel: {
+              NSLog(@"下载1状态:取消");
+         }
+              break;
+         case TXTaskRequestStateCompleted: {
+              NSLog(@"下载1状态:完成");
+         }
+              break;
+            default:
+              break;
+      }
+})
+.start();
+```
+#### 总结
+* 方法1和方法2具备相同设置功能,但方法2设置功能更多、更齐全以及更方便。
 ### 代码片段
 ```objc
-
 /**
  *  设置API请求
  */
@@ -365,7 +446,6 @@ apiRequest
  *  暂停请求
  */
 - (TXTaskRequest *(^)(void))pause;
-
 @end
 
 ```

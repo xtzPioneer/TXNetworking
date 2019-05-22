@@ -458,3 +458,5 @@ taskRequest.setMethod(Upload)
 @end
 
 ```
+### 反馈
+> 开发中遇到bug，希望小伙伴儿们能够及时反馈 [E-mail](xtz_pioneer@163.com)

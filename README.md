@@ -206,121 +206,11 @@ taskRequest.setMethod(Upload)
 })
 .start();
 ```
-#### 总结
-* 方法1和方法2具备相同设置功能,但方法2设置功能更多、更齐全以及更方便。
 ### 代码片段
 ```objc
-/**
- *  设置API请求
- */
-@interface TXAPIRequest (TXSetAPIRequest)
+#import "TXTaskRequest.h"
 
-/**
- *  设置请求类型
- */
-- (TXAPIRequest *(^)(TXAPIRequestMethodType method))setMethod;
-
-/**
- *  设置请求的URL
- */
-- (TXAPIRequest *(^)(NSString * _Nonnull))setURL;
-
-/**
- *  设置请求的baseURL
- */
-- (TXAPIRequest *(^)(NSString * _Nullable))setBaseURL;
-
-/**
- *  设置请求的超时间隔
- */
-- (TXAPIRequest *(^)(NSTimeInterval timeoutInterval))setTimeoutInterval;
-
-/**
- *  设置请求头(会覆盖之前的请求头)
- */
-- (TXAPIRequest *(^)(NSDictionary<NSString *,NSString *> * _Nonnull))setHeaders;
-
-/**
- *  添加请求头(不会覆盖之前的请求头)
- */
-- (TXAPIRequest *(^)(NSDictionary<NSString *,NSString *> * _Nonnull))addHeaders;
-
-/**
- *  设置请求的参数(会覆盖之前的参数)
- */
-- (TXAPIRequest *(^)(NSDictionary<NSString *,NSObject *> * _Nonnull))setParameters;
-
-/**
- *  添加请求参数(不会覆盖之前的参数)
- */
-- (TXAPIRequest *(^)(NSDictionary<NSString *,NSObject *> * _Nonnull))addParameters;
-
-/**
- *  设置请求的默认内容类型(会覆盖之前的内容类型)
- */
-- (TXAPIRequest *(^)(NSSet<NSString *> *contentTypes))setContentTypes;
-
-/**
- *  添加请求的默认内容类型(不会覆盖之前的内容类型)
- */
-- (TXAPIRequest *(^)(NSSet<NSString *> *contentTypes))addContentTypes;
-
-/**
- *  设置请求的结果回调
- */
-- (TXAPIRequest *(^)(TXSuccessHandler _Nullable))setSuccessHandler;
-
-/**
- *  设置请求的失败回调
- */
-- (TXAPIRequest *(^)(TXFailureHandler _Nullable))setFailureHandler;
-
-/**
- *  设置请求的进度回调
- */
-- (TXAPIRequest *(^)(TXProgressHandler _Nullable))setProgressHandler;
-
-/**
- *  设置成功格式回调
- */
-- (TXAPIRequest *(^)(TXFormatHandler _Nullable))setSuccessFormatHandler;
-
-/**
- *  设置失败格式回调
- */
-- (TXAPIRequest *(^)(TXFormatHandler _Nullable))setFailureFormatHandler;
-
-/**
- *  设置进度格式回调
- */
-- (TXAPIRequest *(^)(TXFormatHandler _Nullable))setProgressFormatHandler;
-
-/**
- *  设置API请求状态回调
- */
-- (TXAPIRequest *(^)(TXAPIRequestStateHandler _Nullable))setStateHandler;
-
-/**
- *  设置是否DeBug
- */
-- (TXAPIRequest *(^)(BOOL deBug))setDeBug;
-
-/**
- *  设置DeBug回调
- */
-- (TXAPIRequest *(^)(TXDeBugHandler _Nullable))setDeBugHandler;
-
-/**
- *  开始请求
- */
-- (TXAPIRequest *(^)(void))start;
-
-/**
- *  取消请求
- */
-- (TXAPIRequest *(^)(void))cancel;
-
-@end
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  设置任务请求
@@ -456,9 +346,13 @@ taskRequest.setMethod(Upload)
  *  暂停请求
  */
 - (TXTaskRequest *(^)(void))pause;
+
 @end
 
 ```
+#### 总结
+* 方法1:采用函数式编程以及离散式编程,使其具备更加灵活的操作性。
+* 方法2:采用链式编程以及扩展式编程,使其具备方法1的所有特性，并且具备更加灵活的延展性以及扩展性。
 ### 反馈
 > 开发中遇到bug，希望小伙伴儿们能够及时反馈到E-mail！ xtz_pioneer@163.com
 ### 开发环境&支持版本

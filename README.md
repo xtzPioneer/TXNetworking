@@ -14,7 +14,7 @@
 ```ruby
 pod 'TXNetworking'
 ```
-### 使用教程
+### 使用姿势
 ```objc
 #import "TXNetworking.h"
 ```

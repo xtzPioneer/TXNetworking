@@ -56,6 +56,66 @@ pod 'TXNetworking'
 ```
 #### 总结
 * 方法1和方法2具备相同设置功能,但方法2设置功能更多、更齐全以及更方便。
+#### API请求-方法1
+```objc
+TXAPIRequest *apiRequest=[TXAPIRequest request];
+apiRequest.method=POST;
+apiRequest.url=@"APItest";
+apiRequest.baseURL=@"APItestbaseURL";
+apiRequest.parameters=@{@"testAPIParameters":@"APIParameters"};
+apiRequest.headers=@{@"testAPIHeaders":@"APIHeaders"};
+apiRequest.contentTypes=[NSSet setWithObjects:@"testAPIContentTypes", nil];
+apiRequest.timeoutInterval=50;
+// 开始API请求
+[apiRequest startAPIRequest]
+// 取消API请求
+[apiRequest cancelAPIRequest]
+```
+#### API请求-方法2
+```objc
+TXAPIRequest *apiRequest=[TXAPIRequest request];
+apiRequest
+.setMethod(GET)
+.setURL(@"APItestURL-m2")
+.setBaseURL(@"APItestbaseURL-m2")
+.setParameters(@{@"APItestParameter":@"setf2"})
+.addParameters(@{@"APItestParameter2":@"addf2"})
+.setHeaders(@{@"APIHeaders":@"setf2"})
+.addHeaders(@{@"APIHeaders2":@"addf2"})
+.setContentTypes([NSSet setWithObjects:@"APISetContentTypes", nil])
+.addContentTypes([NSSet setWithObjects:@"APIaddContentTypes", nil])
+.setTimeoutInterval(60)
+.setDeBug(NO)
+.setSuccessHandler(^ (id obj){
+        NSLog(@"成功回调:%@",obj);
+})
+.setFailureHandler(^ (id obj){
+        NSLog(@"失败回调:%@",obj);
+})
+.setProgressHandler(^ (id obj){
+        NSLog(@"进度回调:%@",obj);
+})
+.setStateHandler(^ (TXAPIRequestState state){
+        switch (state) {
+            case TXAPIRequestStateRunning: {
+                NSLog(@"运行");
+            }
+                break;
+            case TXAPIRequestStateCancel: {
+                NSLog(@"取消");
+            }
+                break;
+            case TXAPIRequestStateCompleted: {
+                NSLog(@"完成");
+            }
+                break;
+                
+            default:
+                break;
+        }
+})
+.start();
+```
 ### 代码片段
 ```objc
 

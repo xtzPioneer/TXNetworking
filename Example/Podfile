@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'TXNetworking_Example' do
+  pod 'TXNetworking', :path => '../'
+
+  target 'TXNetworking_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

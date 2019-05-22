@@ -1,0 +1,6 @@
+framework module TXNetworking {
+  umbrella header "TXNetworking-umbrella.h"
+
+  export *
+  module * { export * }
+}

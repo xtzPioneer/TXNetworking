@@ -4,6 +4,58 @@
 ```ruby
 pod 'TXNetworking'
 ```
+### 使用教程
+```objc
+#import "TXNetworking.h"
+```
+#### 设置配置-方法1
+```objc
+[TXNetworkingManager setConfig:^(TXNetworkingConfig * _Nonnull config) {
+     config.requestConfig.defaultBaseURL=@"www.test";
+     config.requestConfig.defaultHeaders=@{@"test":@"Headers"};
+     config.requestConfig.defaultParameters=@{@"test":@"parameters"};
+     config.requestConfig.defaultContentTypes=[NSSet setWithObjects:@"test-ContentTypes", nil];
+     config.requestConfig.defaultAPIRequestTimeoutInterval=10.f;
+     config.requestConfig.defaultTaskRequestTimeoutInterval=120.f;
+     config.requestConfig.defaultDownloadFilePath=@"test/DownloadFilePath";
+     config.deBugConfig.defaultDeBug=NO;
+}];
+```
+#### 设置配置-方法2
+```objc
+[TXNetworkingManager manager]
+.setDefaultBaseURL(@"-www.test")
+.setDefaultHeaders(@{@"test":@"test2-Headers"})
+.addDefaultHeaders(@{@"test2":@"add-test2-Headers"})
+.setDefaultParameters(@{@"test":@"test2-Parameters"})
+.addDefaultParameters(@{@"test2":@"add-test2-Parameters"})
+.setDefaultContentTypes([NSSet setWithObjects:@"test2-ContentTypes", nil])
+.addDefaultContentTypes([NSSet setWithObjects:@"add-test2-ContentTypes", nil])
+.setDefaultAPIRequestTimeoutInterval(40.f)
+.setDefaultTaskRequestTimeoutInterval(240.f)
+.setDefaultDownloadFilePath(@"test/DownloadFilePath")
+.setDeBug(YES)
+.setDefaultSuccessFormatHandler(^ id (id obj){
+     return @{
+     @"title":@"我拦截了成功",
+     @"data":obj
+     };
+ })
+.setDefaultFailureFormatHandler(^ id (id obj){
+     return @{
+     @"title":@"我拦截了故障",
+     @"data":obj
+     };
+})
+.setDefaultProgressFormatHandler(^ id (id obj){
+     return @{
+     @"title":@"我拦截了进度",
+     @"data":obj
+     };
+});
+```
+### 设置总结
+* 总结：方法1和方法2具备相同设置功能,但方法2设置功能更多、更齐全以及更方便。
 ### 代码片段
 ```objc
 

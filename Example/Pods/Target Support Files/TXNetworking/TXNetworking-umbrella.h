@@ -16,6 +16,7 @@
 #import "TXNetworkingRequestConfig.h"
 #import "NSString+TXAdd.h"
 #import "TXNetworkingManager+TXAPIRequest.h"
+#import "TXNetworkingManager+TXNetworkMonitoringManager.h"
 #import "TXNetworkingManager+TXSetConfig.h"
 #import "TXNetworkingManager+TXSetDeBugConfig.h"
 #import "TXNetworkingManager+TXSetRequestConfig.h"

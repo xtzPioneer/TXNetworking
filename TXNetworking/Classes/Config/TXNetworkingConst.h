@@ -68,6 +68,20 @@ typedef NS_ENUM(NSInteger,TXTaskRequestState) {
 };
 
 /**
+ *  网络可达性状态
+ */
+typedef NS_ENUM(NSInteger,TXNetworkReachabilityState) {
+    /** 未识别的网络 */
+    TXNetworkReachabilityStateUnknown          = -1,
+    /** 不可达的网络(未连接) */
+    TXNetworkReachabilityStateNotReachable     = 0,
+    /** 2G,3G,4G...的网络 */
+    TXNetworkReachabilityStateReachableViaWWAN = 1,
+    /** Wi-Fi的网络 */
+    TXNetworkReachabilityStateReachableViaWiFi = 2,
+};
+
+/**
  *  请求结果回调
  */
 typedef void (^TXSuccessHandler) (id _Nullable obj);
@@ -106,5 +120,10 @@ typedef void (^TXAPIRequestStateHandler) (TXAPIRequestState state);
  *  任务请求状态回调
  */
 typedef void (^TXTaskRequestStateHandler) (TXTaskRequestState state);
+
+/**
+ *  网络可达性状态状态回调
+ */
+typedef void (^TXNetworkReachabilityStateHandler) (TXNetworkReachabilityState state);
 
 #endif /* TXNetworkingConst_h */

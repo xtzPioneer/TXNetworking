@@ -18,4 +18,5 @@
 #import "TXNetworkingManager+TXAPIRequest.h"
 #import "TXTaskRequest.h"
 #import "TXTaskRequest+TXSetTaskRequest.h"
+#import "TXNetworkingManager+TXNetworkMonitoringManager.h"
 #endif /* TXNetworking_h */

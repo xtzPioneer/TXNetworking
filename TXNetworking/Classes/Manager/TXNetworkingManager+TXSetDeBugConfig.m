@@ -11,11 +11,11 @@
 @implementation TXNetworkingManager (TXSetDeBugConfig)
 
 /**
- *  设置是否DeBug
+ *  设置默认是否DeBug
  */
-- (TXNetworkingManager *(^)(BOOL deBug))setDeBug{
-    return ^TXNetworkingManager * (BOOL deBug) {
-        self.config.deBugConfig.defaultDeBug=deBug;
+- (TXNetworkingManager *(^)(BOOL defaultDeBug))setDefaultDeBug {
+    return ^TXNetworkingManager * (BOOL defaultDeBug) {
+        self.config.deBugConfig.defaultDeBug=defaultDeBug;
         return self;
     };
 }

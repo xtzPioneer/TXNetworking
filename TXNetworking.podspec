@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   # 组件名称
   s.name             = 'TXNetworking'
   # 组件版本
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   # 组件概要说明
   s.summary          = '基于AFNetworking开发的网络管理工具,采用了链式编程、函数式编程、以及离散式编程。使其降低开发成本、提升开发速率。'
   # 组件详细说明

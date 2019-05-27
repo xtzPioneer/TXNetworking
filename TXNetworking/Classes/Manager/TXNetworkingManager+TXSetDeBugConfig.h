@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TXNetworkingManager (TXSetDeBugConfig)
 
 /**
- *  设置是否DeBug
+ *  设置默认是否DeBug
  */
-- (TXNetworkingManager *(^)(BOOL deBug))setDeBug;
+- (TXNetworkingManager *(^)(BOOL defaultDeBug))setDefaultDeBug;
 
 @end
 

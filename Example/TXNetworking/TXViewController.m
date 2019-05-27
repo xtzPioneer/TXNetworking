@@ -45,7 +45,7 @@
      .setDefaultAPIRequestTimeoutInterval(40.f)
      .setDefaultTaskRequestTimeoutInterval(240.f)
      .setDefaultDownloadFilePath(@"test/DownloadFilePath")
-     .setDeBug(YES)
+     .setDefaultDeBug(YES)
      .setDefaultSuccessFormatHandler(^ id (id obj){
      return @{
      @"title":@"我拦截了成功",
@@ -182,7 +182,6 @@
     self.download1=[TXTaskRequest request]
     .setURL(@"http://vd.yinyuetai.com/hc.yinyuetai.com/uploads/videos/common/54B20169854CB6E1F651A01F84468D4A.mp4")
     .setMethod(Download)
-    .setDownloadFilePath(@"/Users/xtz_pioneer/Downloads/Downloads")
     .setDownloadFileName(@"生僻字.mp4")
     .setSuccessHandler(^ (id obj) {
         // 回到主线程刷新UI
@@ -232,7 +231,6 @@
     self.download2=[TXTaskRequest request]
     .setURL(@"http://2019.down.mankgongcha.cn:8090/android/soft/tagodsp.apk")
     .setMethod(Download)
-    .setDownloadFilePath(@"/Users/xtz_pioneer/Downloads/Downloads")
     .setSuccessHandler(^ (id obj){
         // 回到主线程刷新UI
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -341,6 +339,32 @@
     button_cancelAllTasks.frame=CGRectMake(15, 440, 120, 20);
     [button_cancelAllTasks addTarget:self action:@selector(button_cancelAllTasks) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button_cancelAllTasks];
+    
+    [TXNetworkingManager manager]
+    .setStartNetworkMonitoring(YES)
+    .setNetworkReachabilityStateHandler(^ (TXNetworkReachabilityState state){
+        switch (state) {
+            case TXNetworkReachabilityStateUnknown: {
+                NSLog(@"未识别的网络");
+            }
+                break;
+            case TXNetworkReachabilityStateNotReachable: {
+                NSLog(@"不可达的网络(未连接)");
+            }
+                break;
+            case TXNetworkReachabilityStateReachableViaWWAN: {
+                NSLog(@"2G,3G,4G...的网络");
+            }
+                break;
+            case TXNetworkReachabilityStateReachableViaWiFi: {
+                NSLog(@"Wi-Fi的网络");
+            }
+                break;
+                
+            default:
+                break;
+        }
+    });
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
